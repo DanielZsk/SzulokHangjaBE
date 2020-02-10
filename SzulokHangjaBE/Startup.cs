@@ -30,11 +30,11 @@ namespace SzulokHangjaBE
 
 
             //*Later to move to SQL code snippet
-            //services.AddDbContext<SzulokHangjaBEContext>(options =>
-            //        options.UseSqlServer(Configuration.GetConnectionString("SzulokHangjaBEContext")));
-
             services.AddDbContext<SzulokHangjaBEContext>(options =>
-                    options.UseInMemoryDatabase(Configuration.GetConnectionString("SzulokHangjaBEContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("SzulokHangjaBEContext")));
+
+            //services.AddDbContext<SzulokHangjaBEContext>(options =>
+            //        options.UseInMemoryDatabase(Configuration.GetConnectionString("SzulokHangjaBEContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
