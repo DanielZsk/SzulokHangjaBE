@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SzulokHangjaBE.Models.UserPosts
 {
-    public class SuperPost
+    public abstract class SuperPost
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

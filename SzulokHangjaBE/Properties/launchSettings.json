@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/superposts",
+      "launchUrl": "api/parentposts",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "SzulokHangjaBE": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/superposts",
+      "launchUrl": "api/parentposts",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
