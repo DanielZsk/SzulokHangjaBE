@@ -15,14 +15,14 @@ namespace SzulokHangjaBE.Data
         }
         public DbSet<SzulokHangjaBE.Models.UserPosts.ParentPost> ParentPost { get; set; }
 
-        public DbSet<SzulokHangjaBE.Models.UserPosts.TeacherPost> TeacherPost { get; set; }
+        public DbSet<SzulokHangjaBE.Models.UserPosts.TeacherPostRecommendation> TeacherPost { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "ParentPost1", ReviewTopic = "Eszkoztar", ReviewType = false, Title = "Szarok a padok a suliban", Text = "nezzetek ma milyen fikas a pad", AgeOfChild = 8 });
-            modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "ParentPost2", ReviewTopic = "NAT", ReviewType = true, Title = "Szuper jo az uj irodalom tanterv", Text = "vegre olvassak mar a 50shds of greyt altalanosban", AgeOfChild = 13 });
+            modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Budapest", Message= "Ninncs helyettesítés betegség idején"});
+            modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Vas", Message = "Szuper jo az uj irodalom tanterv" });
 
-            modelBuilder.Entity<TeacherPost>().HasData(new TeacherPost() { Id = Guid.NewGuid(), Location = "TeacherPost", ReviewTopic = "NAT", ReviewType = true, Title = "Szuper jo az uj irodalom tanterv", Text = "vegre olvassak mar a 50shds of greyt altalanosban", Salary = 1333333 });
+            modelBuilder.Entity<TeacherPostRecommendation>().HasData(new TeacherPostRecommendation() { Id = Guid.NewGuid(), Location = "Zala", Recommendation = "Több szabadságot a tanároknak"});
         }
     }
 }

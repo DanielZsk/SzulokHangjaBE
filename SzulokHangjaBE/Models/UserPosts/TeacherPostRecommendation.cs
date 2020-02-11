@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace SzulokHangjaBE.Models.UserPosts
 {
-    public class TeacherPost : SuperPost
+    public class TeacherPostRecommendation : SuperPost
     {
-        public int Salary { get; set; }
+        public string Recommendation{ get; set; }
     }
 }

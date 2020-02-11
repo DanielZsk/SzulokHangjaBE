@@ -8,11 +8,8 @@ namespace SzulokHangjaBE.Models.UserPosts
     public abstract class SuperPost
     {
         public Guid Id { get; set; }
-        public string Title { get; set; }
-        public string Text { get; set; }
         public string Location { get; set; }
-        public string ReviewTopic { get; set; }
-        public bool ReviewType { get; set; }
+        public DateTime SubmissionDate { get; set; }
 
     }
 }

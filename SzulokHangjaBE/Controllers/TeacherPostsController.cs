@@ -23,14 +23,14 @@ namespace SzulokHangjaBE.Controllers
 
         // GET: api/TeacherPosts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TeacherPost>>> GetTeacherPost()
+        public async Task<ActionResult<IEnumerable<TeacherPostRecommendation>>> GetTeacherPost()
         {
             return await _context.TeacherPost.ToListAsync();
         }
 
         // GET: api/TeacherPosts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TeacherPost>> GetTeacherPost(Guid id)
+        public async Task<ActionResult<TeacherPostRecommendation>> GetTeacherPost(Guid id)
         {
             var teacherPost = await _context.TeacherPost.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace SzulokHangjaBE.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTeacherPost(Guid id, TeacherPost teacherPost)
+        public async Task<IActionResult> PutTeacherPost(Guid id, TeacherPostRecommendation teacherPost)
         {
             if (id != teacherPost.Id)
             {
@@ -78,7 +78,7 @@ namespace SzulokHangjaBE.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<TeacherPost>> PostTeacherPost(TeacherPost teacherPost)
+        public async Task<ActionResult<TeacherPostRecommendation>> PostTeacherPost(TeacherPostRecommendation teacherPost)
         {
             _context.TeacherPost.Add(teacherPost);
             await _context.SaveChangesAsync();
@@ -88,7 +88,7 @@ namespace SzulokHangjaBE.Controllers
 
         // DELETE: api/TeacherPosts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TeacherPost>> DeleteTeacherPost(Guid id)
+        public async Task<ActionResult<TeacherPostRecommendation>> DeleteTeacherPost(Guid id)
         {
             var teacherPost = await _context.TeacherPost.FindAsync(id);
             if (teacherPost == null)

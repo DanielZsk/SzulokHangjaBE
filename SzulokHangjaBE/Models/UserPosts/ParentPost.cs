@@ -7,6 +7,14 @@ namespace SzulokHangjaBE.Models.UserPosts
 {
     public class ParentPost : SuperPost
     {
-        public int AgeOfChild { get; set; }
+        public string Message { get; set; }
+
+        public string Image { get; set; }
+
+        public Boolean PositiveMessage { get; set; }
+
+        public CommentType CommentType { get; set; }
+
+
     }
 }
