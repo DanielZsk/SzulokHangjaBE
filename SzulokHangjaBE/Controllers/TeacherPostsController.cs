@@ -34,7 +34,6 @@ namespace SzulokHangjaBE.Controllers
         public async Task<List<TeacherPost>> GetTeacherPost2()
         {
             var list = await _context.TeacherPost.ToListAsync();
-            Response
             return list;
         }
 
