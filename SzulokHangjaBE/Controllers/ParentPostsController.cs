@@ -10,7 +10,7 @@ using SzulokHangjaBE.Models.UserPosts;
 
 namespace SzulokHangjaBE.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class ParentPostsController : ControllerBase
     {
@@ -22,10 +22,21 @@ namespace SzulokHangjaBE.Controllers
         }
 
         // GET: api/ParentPosts
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ParentPost>>> GetParentPost()
+        [HttpGet("ListAllParentPosts")]
+        public async Task<ActionResult<IEnumerable<ParentPost>>> GetAllParentPosts()
         {
             return await _context.ParentPost.ToListAsync();
+        }
+
+        [HttpGet("getparentat/")]
+        public async Task<ActionResult<List<ParentPost>>> getXparentpost(string x, string y)
+        {
+            string loc = Request.Query["searchparam"];
+
+            Queries.findby(searchparam)
+
+            var mylist = await _context.ParentPost.ToListAsync<ParentPost>();
+            return mylist.Where(post => post.Location.ToLower() == x).ToList();
         }
 
         // GET: api/ParentPosts/5
