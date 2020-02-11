@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +11,7 @@ using SzulokHangjaBE.Models.UserPosts;
 
 namespace SzulokHangjaBE.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class TeacherPostsController : ControllerBase
     {
@@ -22,10 +23,19 @@ namespace SzulokHangjaBE.Controllers
         }
 
         // GET: api/TeacherPosts
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TeacherPost>>> GetTeacherPost()
         {
             return await _context.TeacherPost.ToListAsync();
+        }
+        [Route("teach2")]
+        [HttpGet]
+        public async Task<List<TeacherPost>> GetTeacherPost2()
+        {
+            var list = await _context.TeacherPost.ToListAsync();
+            Response
+            return list;
         }
 
         // GET: api/TeacherPosts/5
