@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using SzulokHangjaBE.Data;
+using System.Text.Json.Serialization;
 
 namespace SzulokHangjaBE
 {
@@ -28,7 +29,11 @@ namespace SzulokHangjaBE
         {
             services.AddControllers();
 
-
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
             //*Later to move to SQL code snippet
             services.AddDbContext<SzulokHangjaBEContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SzulokHangjaBEContext")));
