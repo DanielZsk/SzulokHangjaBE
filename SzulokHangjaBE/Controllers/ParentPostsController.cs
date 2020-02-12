@@ -33,7 +33,6 @@ namespace SzulokHangjaBE.Controllers
         {
             string loc = Request.Query["searchparam"];
 
-            Queries.findby(searchparam)
 
             var mylist = await _context.ParentPost.ToListAsync<ParentPost>();
             return mylist.Where(post => post.Location.ToLower() == x).ToList();

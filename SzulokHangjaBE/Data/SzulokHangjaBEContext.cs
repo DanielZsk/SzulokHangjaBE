@@ -15,14 +15,16 @@ namespace SzulokHangjaBE.Data
         }
         public DbSet<SzulokHangjaBE.Models.UserPosts.ParentPost> ParentPost { get; set; }
 
-        public DbSet<SzulokHangjaBE.Models.UserPosts.TeacherPostRecommendation> TeacherPost { get; set; }
+        public DbSet<SzulokHangjaBE.Models.UserPosts.TeacherPostRecommendation> TeacherPostRecommendation { get; set; }
+        public DbSet<SzulokHangjaBE.Models.UserPosts.TeacherPostSalary> TeacherPostSalary { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Budapest", Message= "Ninncs helyettesítés betegség idején"});
-            modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Vas", Message = "Szuper jo az uj irodalom tanterv" });
+            modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Budapest", SubmissionDate= DateTime.Now, Message = "Ninncs helyettesítés betegség idején", PositiveMessage=false,CommentType=Models.CommentType.MATERIAL});
+            modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Vas", SubmissionDate = DateTime.Now, Message = "Szuper jo az uj irodalom tanterv", PositiveMessage=true, CommentType = Models.CommentType.PERSONAL });
 
-            modelBuilder.Entity<TeacherPostRecommendation>().HasData(new TeacherPostRecommendation() { Id = Guid.NewGuid(), Location = "Zala", Recommendation = "Több szabadságot a tanároknak"});
+            modelBuilder.Entity<TeacherPostRecommendation>().HasData(new TeacherPostRecommendation() { Id = Guid.NewGuid(), Location = "Zala", Name="Maris", SubmissionDate = DateTime.Now, Recommendation = "Több szabadságot a tanároknak"});
         }
     }
 }

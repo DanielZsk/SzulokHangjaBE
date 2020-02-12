@@ -24,16 +24,16 @@ namespace SzulokHangjaBE.Controllers
 
         // GET: api/TeacherPosts
 
-        [HttpGet]
+        [HttpGet("teacherpostsall")]
         public async Task<ActionResult<IEnumerable<TeacherPostRecommendation>>> GetTeacherPost()
         {
-            return await _context.TeacherPost.ToListAsync();
+            return await _context.TeacherPostRecommendation.ToListAsync();
         }
         [Route("teach2")]
         [HttpGet]
-        public async Task<List<TeacherPost>> GetTeacherPost2()
+        public async Task<List<TeacherPostRecommendation>> GetTeacherPost2()
         {
-            var list = await _context.TeacherPost.ToListAsync();
+            var list = await _context.TeacherPostRecommendation.ToListAsync();
             return list;
         }
 
@@ -41,7 +41,7 @@ namespace SzulokHangjaBE.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TeacherPostRecommendation>> GetTeacherPost(Guid id)
         {
-            var teacherPost = await _context.TeacherPost.FindAsync(id);
+            var teacherPost = await _context.TeacherPostRecommendation.FindAsync(id);
 
             if (teacherPost == null)
             {
@@ -89,7 +89,7 @@ namespace SzulokHangjaBE.Controllers
         [HttpPost]
         public async Task<ActionResult<TeacherPostRecommendation>> PostTeacherPost(TeacherPostRecommendation teacherPost)
         {
-            _context.TeacherPost.Add(teacherPost);
+            _context.TeacherPostRecommendation.Add(teacherPost);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTeacherPost", new { id = teacherPost.Id }, teacherPost);
@@ -99,13 +99,13 @@ namespace SzulokHangjaBE.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<TeacherPostRecommendation>> DeleteTeacherPost(Guid id)
         {
-            var teacherPost = await _context.TeacherPost.FindAsync(id);
+            var teacherPost = await _context.TeacherPostRecommendation.FindAsync(id);
             if (teacherPost == null)
             {
                 return NotFound();
             }
 
-            _context.TeacherPost.Remove(teacherPost);
+            _context.TeacherPostRecommendation.Remove(teacherPost);
             await _context.SaveChangesAsync();
 
             return teacherPost;
@@ -113,7 +113,7 @@ namespace SzulokHangjaBE.Controllers
 
         private bool TeacherPostExists(Guid id)
         {
-            return _context.TeacherPost.Any(e => e.Id == id);
+            return _context.TeacherPostRecommendation.Any(e => e.Id == id);
         }
     }
 }
