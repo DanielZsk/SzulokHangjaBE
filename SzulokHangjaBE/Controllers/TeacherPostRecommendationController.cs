@@ -63,6 +63,16 @@ namespace SzulokHangjaBE.Controllers
             return NotFound();
         }
 
+        [HttpGet("filter")]
+        public async Task<ActionResult<IEnumerable<TeacherPostRecommendation>>> FilterBy()
+        {
+            var parameter = Request.Query["parameter"];
+            var field = Request.Query["field"];
+            var result = await DB.FilterBy(field, parameter.ToString());
+            return result;
+
+        }
+
 
         private bool TeacherPostExists(Guid id)
         {

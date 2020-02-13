@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SzulokHangjaBE.Data;
 using SzulokHangjaBE.Models.UserPosts;
 
 namespace SzulokHangjaBE.Services
 {
-    public class FilterPosts<T> where T: class
+    public class FilterPosts<T> where T : class
     {
         private readonly SzulokHangjaBEContext _context;
         private DbSet<T> _db;
@@ -42,9 +43,27 @@ namespace SzulokHangjaBE.Services
             return "NOT OK";
         }
 
-        public async Task<List<T>> filterBy(string field)
+        public async Task<List<T>> FilterBy(string field, string parameter)
         {
-           var result = _db.FindAsync
+            //var result = from item in _db
+            //             where item.GetType().GetProperty(field).GetValue(item) == parameter
+            //             select item;
+            bool Abc(T item)
+            {
+                var a = typeof(T).GetProperty(field);
+                var b = a.GetValue(item).ToString().ToLower();
+                return b == parameter;
+            }
+
+            //Expression<Func<T, bool>> predicate = item => (string)typeof(T).GetProperty(field).GetValue(item) == parameter;
+            List<T> result = _db.Where(Abc).ToList();
+
+            return result.ToList();
         }
+
+       
+
+       
     }
 }
+

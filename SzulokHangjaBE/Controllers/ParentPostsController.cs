@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SzulokHangjaBE.Data;
 using SzulokHangjaBE.Models.UserPosts;
+using SzulokHangjaBE.Services;
 
 namespace SzulokHangjaBE.Controllers
 {
@@ -15,111 +16,58 @@ namespace SzulokHangjaBE.Controllers
     public class ParentPostsController : ControllerBase
     {
         private readonly SzulokHangjaBEContext _context;
+        private FilterPosts<ParentPost> DB { get; set; }
 
         public ParentPostsController(SzulokHangjaBEContext context)
         {
             _context = context;
+            DB = new FilterPosts<ParentPost>(_context.ParentPost, _context);
         }
 
         // GET: api/ParentPosts
-        [HttpGet("all")]
+        [HttpGet("listall")]
         public async Task<ActionResult<IEnumerable<ParentPost>>> GetAllParentPosts()
         {
-            return await _context.ParentPost.ToListAsync();
+            return await DB.ListAll();
+            
         }
 
-        [HttpGet("positiveall")]
-        public async Task<ActionResult<List<ParentPost>>> getPositiveParentpost()
+        [HttpGet("filter")]
+        public async Task<ActionResult<List<ParentPost>>> filter()
         {
-            //string loc = Request.Query["searchparam"];
+            var parameter = Request.Query["parameter"];
+            var field = Request.Query["field"];
+            var result = await DB.FilterBy(field, parameter.ToString());
+            return result;
 
-
-            var mylist = await _context.ParentPost.ToListAsync<ParentPost>();
-            return mylist.Where(post => post.PositiveMessage == true).ToList();
-        }
-
-        [HttpGet("negativeall")]
-        public async Task<ActionResult<List<ParentPost>>> getNegativeParentpost()
-        {
-            //string loc = Request.Query["searchparam"];
-
-
-            var mylist = await _context.ParentPost.ToListAsync<ParentPost>();
-            return mylist.Where(post => post.PositiveMessage == false).ToList();
         }
 
         // GET: api/ParentPosts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ParentPost>> GetParentPost(Guid id)
         {
-            var parentPost = await _context.ParentPost.FindAsync(id);
+            var parentpost = await DB.SearchById(id);
 
-            if (parentPost == null)
+            if (parentpost == null)
             {
                 return NotFound();
             }
 
-            return parentPost;
+            return parentpost;
         }
 
-        // PUT: api/ParentPosts/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutParentPost(Guid id, ParentPost parentPost)
-        {
-            if (id != parentPost.Id)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(parentPost).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ParentPostExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/ParentPosts
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<ParentPost>> PostParentPost(ParentPost parentPost)
+        public async Task<ActionResult<ParentPost>> PostTeacherPost(ParentPost parentpost)
         {
-            _context.ParentPost.Add(parentPost);
-            await _context.SaveChangesAsync();
+            var response = await DB.Add(parentpost);
+            if (response == "OK") { return CreatedAtAction("GetTeacherPostSalary", new { id = parentpost.Id }, parentpost); }
 
-            return CreatedAtAction("GetParentPost", new { id = parentPost.Id }, parentPost);
-        }
-
-        // DELETE: api/ParentPosts/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ParentPost>> DeleteParentPost(Guid id)
-        {
-            var parentPost = await _context.ParentPost.FindAsync(id);
-            if (parentPost == null)
-            {
-                return NotFound();
-            }
-
-            _context.ParentPost.Remove(parentPost);
-            await _context.SaveChangesAsync();
-
-            return parentPost;
+            return NotFound();
         }
 
         private bool ParentPostExists(Guid id)

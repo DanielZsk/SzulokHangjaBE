@@ -11,8 +11,12 @@ namespace SzulokHangjaBE.Models.UserPosts
         public Guid Id { get; set; }
         [Required]
         public string Location { get; set; }
-        [Required]
         public DateTime SubmissionDate { get; set; }
+
+        public SuperPost()
+        {
+            SubmissionDate = DateTime.Now;
+        }
 
     }
 }
