@@ -8,10 +8,14 @@ namespace SzulokHangjaBE.Models.UserPosts
 {
     public abstract class SuperPost
     {
+        public SuperPost()
+        {
+            SubmissionDate =  DateTime.Now;
+        }
         public Guid Id { get; set; }
         [Required]
         public string Location { get; set; }
-        [Required]
+        
         public DateTime SubmissionDate { get; set; }
 
     }

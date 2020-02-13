@@ -52,21 +52,21 @@ namespace SzulokHangjaBE.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8afea9c2-83ad-4c74-99a3-b0466a38b6f2"),
+                            Id = new Guid("35dab522-7a94-4b9a-aef6-c55b3420d4eb"),
                             CommentType = 1,
                             Location = "Budapest",
                             Message = "Ninncs helyettesítés betegség idején",
                             PositiveMessage = false,
-                            SubmissionDate = new DateTime(2020, 2, 12, 12, 44, 36, 993, DateTimeKind.Local).AddTicks(9109)
+                            SubmissionDate = new DateTime(2020, 2, 13, 14, 45, 35, 953, DateTimeKind.Local).AddTicks(9064)
                         },
                         new
                         {
-                            Id = new Guid("c4827f96-d7cf-43d2-928d-63049143fb4b"),
+                            Id = new Guid("79ddedbf-676d-47aa-966c-cdb03c1120c6"),
                             CommentType = 0,
                             Location = "Vas",
                             Message = "Szuper jo az uj irodalom tanterv",
                             PositiveMessage = true,
-                            SubmissionDate = new DateTime(2020, 2, 12, 12, 44, 36, 996, DateTimeKind.Local).AddTicks(8888)
+                            SubmissionDate = new DateTime(2020, 2, 13, 14, 45, 35, 957, DateTimeKind.Local).AddTicks(2988)
                         });
                 });
 
@@ -98,11 +98,11 @@ namespace SzulokHangjaBE.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b8c5f1fd-fb7f-4379-b893-7113404378e8"),
+                            Id = new Guid("15002386-cca1-4bda-b772-c8f70cfb20e1"),
                             Location = "Zala",
                             Name = "Maris",
                             Recommendation = "Több szabadságot a tanároknak",
-                            SubmissionDate = new DateTime(2020, 2, 12, 12, 44, 36, 996, DateTimeKind.Local).AddTicks(9677)
+                            SubmissionDate = new DateTime(2020, 2, 13, 14, 45, 35, 957, DateTimeKind.Local).AddTicks(3735)
                         });
                 });
 
@@ -140,6 +140,18 @@ namespace SzulokHangjaBE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TeacherPostSalary");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7be0359f-7035-4019-ae80-db2283685cdd"),
+                            Experience = "10 éve tanítok irodalmat és történelmet",
+                            Location = "Bekes",
+                            Name = "Ili",
+                            Salary = 250000,
+                            SubmissionDate = new DateTime(2020, 2, 13, 14, 45, 35, 957, DateTimeKind.Local).AddTicks(5197),
+                            Workload = "Heti 38 óra plusz helyettesítések"
+                        });
                 });
 #pragma warning restore 612, 618
         }
