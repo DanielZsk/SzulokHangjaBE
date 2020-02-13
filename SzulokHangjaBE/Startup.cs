@@ -27,6 +27,7 @@ namespace SzulokHangjaBE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
 
             services.AddMvc().AddJsonOptions(options =>
@@ -34,8 +35,6 @@ namespace SzulokHangjaBE
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
-
-            services.AddCors();
             //*Later to move to SQL code snippet
             services.AddDbContext<SzulokHangjaBEContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SzulokHangjaBEContext")));
@@ -51,7 +50,7 @@ namespace SzulokHangjaBE
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
