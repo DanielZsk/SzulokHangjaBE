@@ -25,6 +25,7 @@ namespace SzulokHangjaBE.Data
             modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Vas", SubmissionDate = DateTime.Now, Message = "Szuper jo az uj irodalom tanterv", PositiveMessage=true, CommentType = Models.CommentType.PERSONAL });
 
             modelBuilder.Entity<TeacherPostRecommendation>().HasData(new TeacherPostRecommendation() { Id = Guid.NewGuid(), Location = "Zala", Name="Maris", SubmissionDate = DateTime.Now, Recommendation = "Több szabadságot a tanároknak"});
+            modelBuilder.Entity<TeacherPostSalary>().HasData(new TeacherPostSalary() { Id = Guid.NewGuid(), Location = "Bekes", Name = "Ili", SubmissionDate = DateTime.Now, Experience = "10 éve tanítok irodalmat és történelmet", Workload= "Heti 38 óra plusz helyettesítések", Salary = 250000});
         }
     }
 }

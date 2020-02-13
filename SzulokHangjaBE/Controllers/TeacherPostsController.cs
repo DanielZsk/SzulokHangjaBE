@@ -11,7 +11,7 @@ using SzulokHangjaBE.Models.UserPosts;
 
 namespace SzulokHangjaBE.Controllers
 {
-    [Route("api/")]
+    [Route("api/teacher/")]
     [ApiController]
     public class TeacherPostsController : ControllerBase
     {
@@ -24,18 +24,18 @@ namespace SzulokHangjaBE.Controllers
 
         // GET: api/TeacherPosts
 
-        [HttpGet("teacherpostsall")]
-        public async Task<ActionResult<IEnumerable<TeacherPostRecommendation>>> GetTeacherPost()
+        [HttpGet("recommendationall")]
+        public async Task<ActionResult<IEnumerable<TeacherPostRecommendation>>> GetTeacherRecommendation()
         {
             return await _context.TeacherPostRecommendation.ToListAsync();
         }
-        [Route("teach2")]
-        [HttpGet]
-        public async Task<List<TeacherPostRecommendation>> GetTeacherPost2()
+
+        [HttpGet("salariesall")]
+        public async Task<ActionResult<IEnumerable<TeacherPostSalary>>> GetTeacherSalary()
         {
-            var list = await _context.TeacherPostRecommendation.ToListAsync();
-            return list;
+            return await _context.TeacherPostSalary.ToListAsync();
         }
+
 
         // GET: api/TeacherPosts/5
         [HttpGet("{id}")]
