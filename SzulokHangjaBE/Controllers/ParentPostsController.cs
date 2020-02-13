@@ -10,7 +10,7 @@ using SzulokHangjaBE.Models.UserPosts;
 
 namespace SzulokHangjaBE.Controllers
 {
-    [Route("api/")]
+    [Route("api/parent/")]
     [ApiController]
     public class ParentPostsController : ControllerBase
     {
@@ -22,20 +22,30 @@ namespace SzulokHangjaBE.Controllers
         }
 
         // GET: api/ParentPosts
-        [HttpGet("ListAllParentPosts")]
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<ParentPost>>> GetAllParentPosts()
         {
             return await _context.ParentPost.ToListAsync();
         }
 
-        [HttpGet("getparentat/")]
-        public async Task<ActionResult<List<ParentPost>>> getXparentpost(string x, string y)
+        [HttpGet("positiveall")]
+        public async Task<ActionResult<List<ParentPost>>> getPositiveParentpost()
         {
-            string loc = Request.Query["searchparam"];
+            //string loc = Request.Query["searchparam"];
 
 
             var mylist = await _context.ParentPost.ToListAsync<ParentPost>();
-            return mylist.Where(post => post.Location.ToLower() == x).ToList();
+            return mylist.Where(post => post.PositiveMessage == true).ToList();
+        }
+
+        [HttpGet("negativeall")]
+        public async Task<ActionResult<List<ParentPost>>> getNegativeParentpost()
+        {
+            //string loc = Request.Query["searchparam"];
+
+
+            var mylist = await _context.ParentPost.ToListAsync<ParentPost>();
+            return mylist.Where(post => post.PositiveMessage == false).ToList();
         }
 
         // GET: api/ParentPosts/5
