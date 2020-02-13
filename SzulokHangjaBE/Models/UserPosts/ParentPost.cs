@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace SzulokHangjaBE.Models.UserPosts
-{
+
+namespace SzulokHangjaBE.Models.UserPosts { 
+
     public class ParentPost : SuperPost
     {
         [Required]
@@ -18,7 +19,5 @@ namespace SzulokHangjaBE.Models.UserPosts
 
         [Required]
         public CommentType CommentType { get; set; }
-
-
     }
 }
