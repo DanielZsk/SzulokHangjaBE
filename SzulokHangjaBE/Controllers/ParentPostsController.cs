@@ -61,7 +61,7 @@ namespace SzulokHangjaBE.Controllers
         // POST: api/ParentPosts
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<ActionResult<ParentPost>> PostTeacherPost(ParentPost parentpost)
         {
             var response = await DB.Add(parentpost);
