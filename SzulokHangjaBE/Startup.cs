@@ -35,6 +35,8 @@ namespace SzulokHangjaBE
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
+
+            services.AddCors();
             //*Later to move to SQL code snippet
             services.AddDbContext<SzulokHangjaBEContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SzulokHangjaBEContext")));
@@ -51,6 +53,8 @@ namespace SzulokHangjaBE
                 app.UseDeveloperExceptionPage();
             }
             
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
