@@ -25,7 +25,8 @@ namespace SzulokHangjaBE.Data
             modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Vas",  Message = "Szuper jo az uj irodalom tanterv", PositiveMessage=true, CommentType = Models.CommentType.PERSONAL });
 
             modelBuilder.Entity<TeacherPostRecommendation>().HasData(new TeacherPostRecommendation() { Id = Guid.NewGuid(), Location = "Zala", Name="Maris",  Recommendation = "Több szabadságot a tanároknak"});
-            modelBuilder.Entity<TeacherPostSalary>().HasData(new TeacherPostSalary() { Id = Guid.NewGuid(), Location = "Bekes", Name = "Ili",  Experience = "10 éve tanítok irodalmat és történelmet", Workload= "Heti 38 óra plusz helyettesítések", Salary = 250000});
+            modelBuilder.Entity<TeacherPostSalary>().HasData(new TeacherPostSalary() { Id = Guid.NewGuid(), Location = "Bekes", Name = "Ili",  Experience = "5 éve tanítok irodcdccdcdcdcdcdcdcdcdcdcdcdcddcds történelmet", Workload= "Heti 38 óra plusz helyettesítések", Salary = 250000});
+            modelBuilder.Entity<TeacherPostSalary>().HasData(new TeacherPostSalary() { Id = Guid.NewGuid(), Location = "Pjost", Name = "Zsuzs", Experience = "10 éve tanítok irodalmat és történelmet", Workload = "Heti 38 óra plusz helyettesítések", Salary = 2232323 });
         }
     }
 }
