@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SzulokHangjaBE.Data;
 using SzulokHangjaBE.Models.UserPosts;
+using System.Reflection;
 
 namespace SzulokHangjaBE.Services
 {
@@ -14,11 +15,33 @@ namespace SzulokHangjaBE.Services
     {
         private readonly SzulokHangjaBEContext _context;
         private DbSet<T> _db;
+        private Dictionary<string, string> _dbmapper = new Dictionary<string, string>() {
+            { "SzulokHangjaBE.Models.UserPosts.ParentPost","ParentPost" },
+            {"TeacherPostRecommendation", "TeacherPostRecommendation" },
+            {"TeacherPostSalary", "TeacherPostSalary" }
+        };
 
         public FilterPosts(DbSet<T> db, SzulokHangjaBEContext context)
         {
-            _db = db;
+           // _db = db;
             _context = context;
+            CreateContext();
+        }
+
+        private void CreateContext()
+        {
+
+            //1 Megoldas - DO NOT DELETE PLEASE ( creates a copy with reflection)
+            //string typeofcls = _dbmapper[typeof(T).ToString()];
+            //var proprty = _context.GetType().GetProperty(typeofcls);
+            //string pName = proprty.Name; // pl ParentPost NAme
+            //ez hozzafer  a nev alapjan a context propertijehez
+            //var bena = _context.GetType().GetProperty(pName).GetValue(_context);
+            //_db = Convert.ChangeType(new object(), propertyType);
+            //_db = aa;
+
+            //2. Megoldas
+            _db = (DbSet<T>)_context.GetType().GetMethod("Set").MakeGenericMethod(typeof(T)).Invoke(_context, null);
         }
 
         public async Task<ActionResult<T>> SearchById(Guid id)
@@ -43,27 +66,26 @@ namespace SzulokHangjaBE.Services
             return "NOT OK";
         }
 
-        public async Task<List<T>> FilterBy(string field, string parameter)
+        public async Task<ActionResult<List<T>>> FilterBy(string field, string parameter)
         {
-            //var result = from item in _db
-            //             where item.GetType().GetProperty(field).GetValue(item) == parameter
-            //             select item;
-            bool Abc(T item)
+            ////First letter capitalizer, useless for 2word properties, e.g. SubmissionDate
+            //field = field.First().ToString().ToUpper() + field.Substring(1);
+            var propName = typeof(T).GetProperty(field);
+
+            bool FieldValuePredicate(T item)
             {
-                var a = typeof(T).GetProperty(field);
-                var b = a.GetValue(item).ToString().ToLower();
+                var b = propName.GetValue(item).ToString().ToLower();
                 return b == parameter;
             }
+            //List<T> result = _db.Where(FieldValuePredicate).ToList();
+            //return result.ToList();
 
-            //Expression<Func<T, bool>> predicate = item => (string)typeof(T).GetProperty(field).GetValue(item) == parameter;
-            List<T> result = _db.Where(Abc).ToList();
-
-            return result.ToList();
+            return _db.AsEnumerable().Where(item => propName.GetValue(item).ToString().ToLower() == parameter).ToList();
+           // return _db.Where(item => 12434.ToString().ToLower() == parameter).ToList();
         }
 
-       
 
-       
+
     }
 }
 

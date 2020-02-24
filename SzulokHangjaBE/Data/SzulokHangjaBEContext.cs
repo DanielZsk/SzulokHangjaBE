@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SzulokHangjaBE.Models.UserPosts;
 
 namespace SzulokHangjaBE.Data
@@ -18,6 +19,14 @@ namespace SzulokHangjaBE.Data
         public DbSet<SzulokHangjaBE.Models.UserPosts.TeacherPostRecommendation> TeacherPostRecommendation { get; set; }
         public DbSet<SzulokHangjaBE.Models.UserPosts.TeacherPostSalary> TeacherPostSalary { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseLoggerFactory(MyLoggerFactory) // Warning: Do not create a new ILoggerFactory instance each time
+        .UseSqlServer(
+           "Server=(localdb)\\mssqllocaldb;Database=SzulokHangjaBEContext-87d748d3-08d3-47b9-a05c-258e0abb2d44;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+        public static readonly ILoggerFactory MyLoggerFactory
+    = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

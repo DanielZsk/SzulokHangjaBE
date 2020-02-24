@@ -12,11 +12,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using SzulokHangjaBE.Data;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Logging.Console;
 
 namespace SzulokHangjaBE
 {
     public class Startup
     {
+        public static readonly ILoggerFactory MyLoggerFactory
+            = LoggerFactory.Create(builder => { builder.AddConsole(); });
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

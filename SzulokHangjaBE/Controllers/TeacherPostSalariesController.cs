@@ -60,7 +60,7 @@ namespace SzulokHangjaBE.Controllers
         }
 
         [HttpGet("filter")]
-        public async Task<ActionResult<IEnumerable<TeacherPostSalary>>> FilterBy()
+        public async Task<ActionResult<List<TeacherPostSalary>>> FilterBy()
         {
             var parameter = Request.Query["parameter"];
             var field = Request.Query["field"];
