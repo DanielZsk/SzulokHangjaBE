@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SzulokHangjaBE.Data;
 
 namespace SzulokHangjaBE.Migrations
 {
     [DbContext(typeof(SzulokHangjaBEContext))]
-    partial class SzulokHangjaBEContextModelSnapshot : ModelSnapshot
+    [Migration("20200226100925_AddingIdentity")]
+    partial class AddingIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,21 +250,21 @@ namespace SzulokHangjaBE.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2cdd961a-b346-4688-97f6-14d96b8c37aa"),
+                            Id = new Guid("ab2305eb-e328-407b-964a-7f68c4d3e50e"),
                             CommentType = 1,
                             Location = "Budapest",
                             Message = "Ninncs helyettesítés betegség idején",
                             PositiveMessage = false,
-                            SubmissionDate = new DateTime(2020, 2, 26, 11, 59, 17, 907, DateTimeKind.Local).AddTicks(6569)
+                            SubmissionDate = new DateTime(2020, 2, 26, 11, 9, 25, 192, DateTimeKind.Local).AddTicks(4333)
                         },
                         new
                         {
-                            Id = new Guid("b05dfead-aa2a-439e-a58b-132d2f28e536"),
+                            Id = new Guid("b72720db-14b3-4ac8-8c6c-667da09838dc"),
                             CommentType = 0,
                             Location = "Vas",
                             Message = "Szuper jo az uj irodalom tanterv",
                             PositiveMessage = true,
-                            SubmissionDate = new DateTime(2020, 2, 26, 11, 59, 17, 911, DateTimeKind.Local).AddTicks(3290)
+                            SubmissionDate = new DateTime(2020, 2, 26, 11, 9, 25, 197, DateTimeKind.Local).AddTicks(2220)
                         });
                 });
 
@@ -294,11 +296,11 @@ namespace SzulokHangjaBE.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3072f8e0-10e8-4504-984e-609b6f74efcb"),
+                            Id = new Guid("748bf88d-159d-4d2c-b67c-a82d58dbcf97"),
                             Location = "Zala",
                             Name = "Maris",
                             Recommendation = "Több szabadságot a tanároknak",
-                            SubmissionDate = new DateTime(2020, 2, 26, 11, 59, 17, 911, DateTimeKind.Local).AddTicks(4026)
+                            SubmissionDate = new DateTime(2020, 2, 26, 11, 9, 25, 197, DateTimeKind.Local).AddTicks(2982)
                         });
                 });
 
@@ -340,22 +342,22 @@ namespace SzulokHangjaBE.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ed5125f9-8b48-4d1f-a1f0-fad8890f3d8d"),
+                            Id = new Guid("eeb3284c-516c-4387-9e0c-5b9f56771799"),
                             Experience = "5 éve tanítok irodcdccdcdcdcdcdcdcdcdcdcdcdcddcds történelmet",
                             Location = "Bekes",
                             Name = "Ili",
                             Salary = 250000,
-                            SubmissionDate = new DateTime(2020, 2, 26, 11, 59, 17, 911, DateTimeKind.Local).AddTicks(5495),
+                            SubmissionDate = new DateTime(2020, 2, 26, 11, 9, 25, 197, DateTimeKind.Local).AddTicks(4493),
                             Workload = "Heti 38 óra plusz helyettesítések"
                         },
                         new
                         {
-                            Id = new Guid("744835e0-1938-409a-815f-1ef56b52c790"),
+                            Id = new Guid("d9ec9ebf-3520-4bfc-a7ce-218fc174b9cc"),
                             Experience = "10 éve tanítok irodalmat és történelmet",
                             Location = "Pjost",
                             Name = "Zsuzs",
                             Salary = 2232323,
-                            SubmissionDate = new DateTime(2020, 2, 26, 11, 59, 17, 911, DateTimeKind.Local).AddTicks(7209),
+                            SubmissionDate = new DateTime(2020, 2, 26, 11, 9, 25, 197, DateTimeKind.Local).AddTicks(6172),
                             Workload = "Heti 38 óra plusz helyettesítések"
                         });
                 });

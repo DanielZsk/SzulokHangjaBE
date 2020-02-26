@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using SzulokHangjaBE.Data;
 using System.Text.Json.Serialization;
+using SzulokHangjaBE.Models.Authentication;
+using Microsoft.AspNetCore.Identity;
 
 namespace SzulokHangjaBE
 {
@@ -39,6 +41,17 @@ namespace SzulokHangjaBE
             services.AddDbContext<SzulokHangjaBEContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SzulokHangjaBEContext")));
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<SzulokHangjaBEContext>();
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "credentials";
+                options.ExpireTimeSpan = TimeSpan.FromHours(24);
+                options.Cookie.Domain = "localhost";
+            });
+
             //services.AddDbContext<SzulokHangjaBEContext>(options =>
             //        options.UseInMemoryDatabase(Configuration.GetConnectionString("SzulokHangjaBEContext")));
         }
@@ -50,12 +63,14 @@ namespace SzulokHangjaBE
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseCors(options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
+
+            app.UseAuthorization();            
 
             app.UseEndpoints(endpoints =>
             {

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SzulokHangjaBE.Models.UserPosts;
 
 namespace SzulokHangjaBE.Data
 {
-    public class SzulokHangjaBEContext : DbContext
+    public class SzulokHangjaBEContext : IdentityDbContext
     {
         public SzulokHangjaBEContext (DbContextOptions<SzulokHangjaBEContext> options)
             : base(options)
@@ -21,6 +22,8 @@ namespace SzulokHangjaBE.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Budapest",  Message = "Ninncs helyettesítés betegség idején", PositiveMessage=false,CommentType=Models.CommentType.MATERIAL});
             modelBuilder.Entity<ParentPost>().HasData(new ParentPost() { Id = Guid.NewGuid(), Location = "Vas",  Message = "Szuper jo az uj irodalom tanterv", PositiveMessage=true, CommentType = Models.CommentType.PERSONAL });
 
