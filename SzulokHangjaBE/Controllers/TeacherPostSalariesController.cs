@@ -21,7 +21,7 @@ namespace SzulokHangjaBE.Controllers
         public TeacherPostSalariesController(SzulokHangjaBEContext context)
         {
             _context = context;
-            DB = new FilterPosts<TeacherPostSalary>(_context.TeacherPostSalary,_context);
+            DB = new FilterPosts<TeacherPostSalary>(_context);
         }
 
 

@@ -11,19 +11,14 @@ using System.Reflection;
 
 namespace SzulokHangjaBE.Services
 {
-    public class FilterPosts<T> where T : class
+    public class FilterPosts<T> where T : SuperPost
     {
         private readonly SzulokHangjaBEContext _context;
         private DbSet<T> _db;
-        private Dictionary<string, string> _dbmapper = new Dictionary<string, string>() {
-            { "SzulokHangjaBE.Models.UserPosts.ParentPost","ParentPost" },
-            {"TeacherPostRecommendation", "TeacherPostRecommendation" },
-            {"TeacherPostSalary", "TeacherPostSalary" }
-        };
 
-        public FilterPosts(DbSet<T> db, SzulokHangjaBEContext context)
+
+        public FilterPosts(SzulokHangjaBEContext context)
         {
-           // _db = db;
             _context = context;
             CreateContext();
         }
@@ -56,13 +51,16 @@ namespace SzulokHangjaBE.Services
 
         public async Task<string> Add(T record)
         {
+            record.SubmissionDate = DateTime.Now;
             try
             {
                 _db.Add(record);
                 await _context.SaveChangesAsync();
                 return "OK";
             }
-            catch { }
+            catch (Exception e) { 
+                
+                Console.Write(e.StackTrace); }
             return "NOT OK";
         }
 

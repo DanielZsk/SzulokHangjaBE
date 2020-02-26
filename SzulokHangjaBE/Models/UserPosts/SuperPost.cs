@@ -12,7 +12,7 @@ namespace SzulokHangjaBE.Models.UserPosts
         public Guid Id { get; set; }
         [Required]
         public string Location { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public DateTime SubmissionDate { get; set; }
 
    

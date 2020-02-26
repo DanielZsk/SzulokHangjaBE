@@ -23,7 +23,7 @@ namespace SzulokHangjaBE.Controllers
         public TeacherPostRecommendationController(SzulokHangjaBEContext context)
         {
             _context = context;
-            DB = new FilterPosts<TeacherPostRecommendation>(_context.TeacherPostRecommendation, _context);
+            DB = new FilterPosts<TeacherPostRecommendation>(_context);
 
         }
 

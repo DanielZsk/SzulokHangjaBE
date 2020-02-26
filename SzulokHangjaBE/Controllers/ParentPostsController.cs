@@ -21,7 +21,7 @@ namespace SzulokHangjaBE.Controllers
         public ParentPostsController(SzulokHangjaBEContext context)
         {
             _context = context;
-            DB = new FilterPosts<ParentPost>(_context.ParentPost, _context);
+            DB = new FilterPosts<ParentPost>(_context);
         }
 
         // GET: api/ParentPosts
@@ -62,7 +62,7 @@ namespace SzulokHangjaBE.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost("add")]
-        public async Task<ActionResult<ParentPost>> PostTeacherPost(ParentPost parentpost)
+        public async Task<ActionResult<ParentPost>> PostParentPost(ParentPost parentpost)
         {
             var response = await DB.Add(parentpost);
             if (response == "OK") { return CreatedAtAction("GetTeacherPostSalary", new { id = parentpost.Id }, parentpost); }
