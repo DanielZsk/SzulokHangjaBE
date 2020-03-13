@@ -1,11 +1,12 @@
 using NUnit.Framework;
 using NSubstitute;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using SzulokHangjaBE.Data;
 using SzulokHangjaBE.Controllers;
-using Microsoft.EntityFrameworkCore;
 using SzulokHangjaBE.Models.UserPosts;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using SzulokHangjaBE.Services;
 
 namespace SzulokHangjaBETests
 {
@@ -23,7 +24,8 @@ namespace SzulokHangjaBETests
                 .UseInMemoryDatabase(databaseName: "InMemoryDatabase")
                 .Options;
             var contextMock = Substitute.For<SzulokHangjaBEContext>(options);
-            var parentController = new ParentPostsController(contextMock);
+            var filterMock = Substitute.For<FilterPosts<ParentPost>>(contextMock);
+            var parentController = new ParentPostsController(contextMock, filterMock);
             // from online example: var actual = await _articleRepository.GetById(articleId);
             var result = await parentController.GetAllParentPosts();
             var expected = 2;

@@ -19,10 +19,11 @@ namespace SzulokHangjaBE.Controllers
         private readonly SzulokHangjaBEContext _context;
         private FilterPosts<ParentPost> DB { get; set; }
 
-        public ParentPostsController(SzulokHangjaBEContext context)
+        public ParentPostsController(SzulokHangjaBEContext context, FilterPosts<ParentPost> db)
         {
             _context = context;
-            DB = new FilterPosts<ParentPost>(_context);
+            //DB = new FilterPosts<ParentPost>(_context);
+            DB = db;
         }
 
         // GET: api/ParentPosts
