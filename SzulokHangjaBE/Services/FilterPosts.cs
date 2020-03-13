@@ -49,6 +49,24 @@ namespace SzulokHangjaBE.Services
             return await _db.ToListAsync();
         }
 
+        public async Task<string> Delete(Guid id)
+        {
+            try
+            {
+                var postToDelete = _db.Find(id);
+                _db.Remove(postToDelete);
+                await _context.SaveChangesAsync();
+                return "Successfully deleted";
+            }
+            catch (Exception e)
+            {
+
+                Console.Write(e.StackTrace);
+                return "Could not delete";
+            }
+
+        }
+
         public async Task<string> Add(T record)
         {
             record.SubmissionDate = DateTime.Now;

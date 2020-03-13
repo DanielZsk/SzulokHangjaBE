@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +57,16 @@ namespace SzulokHangjaBE.Controllers
             return parentpost;
         }
 
+        [Authorize]
+        // DELETE: 
+        [HttpDelete ("{id}")]
+        public async Task<ActionResult<string>> DeleteParentPost(Guid id)
+        {
+            var response = await DB.Delete(id);
+
+          
+            return response;
+        }
 
 
         // POST: api/ParentPosts

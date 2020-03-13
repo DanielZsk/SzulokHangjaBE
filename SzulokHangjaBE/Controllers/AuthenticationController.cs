@@ -37,7 +37,7 @@ namespace SzulokHangjaBE.Controllers
                 if (result.Succeeded)
                 {
                    await _signInManager.SignInAsync(newUser, isPersistent: false);
-                   return Ok("SUCESS");
+                   return Ok("Successful registration");
                 }
             }
 
@@ -51,7 +51,7 @@ namespace SzulokHangjaBE.Controllers
 
             if (result.Succeeded)
             {
-                return Ok("SUCESS");
+                return Ok("Successful login");
             }
             else
             {
